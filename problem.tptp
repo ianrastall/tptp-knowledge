@@ -1,0 +1,35 @@
+%--- Types ---
+thf(truth_type, type, truth: $tType).
+thf(knower_type, type, knower: $tType).
+thf(proposition_type, type, proposition: $tType).
+
+%--- Constants ---
+thf(the_truth, type, the_truth: truth).
+thf(the_knower, type, the_knower: knower).
+thf(true_prop, type, true_prop: proposition).
+
+%--- Predicates ---
+thf(knows_type, type, knows: knower > truth > $o).
+thf(holds_type, type, holds: truth > proposition > $o).
+% New predicate: knows_prop
+thf(knows_prop_type, type, knows_prop: knower > proposition > $o).
+
+%--- Axioms ---
+thf(truth_holds_for_true_prop, axiom,
+    holds(the_truth, true_prop)
+).
+
+thf(knower_knows_true_prop, axiom,
+    knows_prop(the_knower, true_prop)
+).
+
+%--- New Axiom: Linking Knowledge of Proposition and Truth ---
+thf(knowledge_link, axiom,
+    ![K: knower, P: proposition, T: truth]:
+        ((knows_prop(K, P) & holds(T, P)) => knows(K, T))
+).
+
+%--- Conjecture ---
+thf(knower_of_true_prop, conjecture,
+    knows(the_knower, the_truth)
+).
