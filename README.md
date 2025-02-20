@@ -65,6 +65,3 @@ This section is not yet applicable.
 *   Explore different knowledge representation formalisms (e.g., epistemic logic).
 *   Investigate the use of model finders to explore different models of the axioms.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. (You can choose a different license if you prefer.)
