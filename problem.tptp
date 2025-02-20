@@ -11,25 +11,35 @@ thf(true_prop, type, true_prop: proposition).
 %--- Predicates ---
 thf(knows_type, type, knows: knower > truth > $o).
 thf(holds_type, type, holds: truth > proposition > $o).
-% New predicate: knows_prop
 thf(knows_prop_type, type, knows_prop: knower > proposition > $o).
+% New predicate: believes
+thf(believes_type, type, believes: knower > proposition > $o).
 
 %--- Axioms ---
 thf(truth_holds_for_true_prop, axiom,
     holds(the_truth, true_prop)
 ).
 
-thf(knower_knows_true_prop, axiom,
-    knows_prop(the_knower, true_prop)
+% We remove the axiom that the knower knows the proposition.
+% thf(knower_knows_true_prop, axiom,
+%     knows_prop(the_knower, true_prop)
+% ).
+
+% New Axiom: The knower *believes* the true proposition.
+thf(knower_believes_true_prop, axiom,
+    believes(the_knower, true_prop)
 ).
 
-%--- New Axiom: Linking Knowledge of Proposition and Truth ---
-thf(knowledge_link, axiom,
+%--- Modified Axiom: Linking Belief, Truth, and Knowledge ---
+thf(belief_truth_to_knowledge, axiom,
     ![K: knower, P: proposition, T: truth]:
-        ((knows_prop(K, P) & holds(T, P)) => knows(K, T))
+        ((believes(K, P) & holds(T, P)) => knows(K, T))
 ).
+
+% We remove the knowledge_link axiom, as this is now covered by
+% the new belief_truth_to_knowledge axiom
 
 %--- Conjecture ---
-thf(knower_of_true_prop, conjecture,
+thf(knower_knows_truth, conjecture,
     knows(the_knower, the_truth)
 ).
